@@ -5,12 +5,12 @@
 #include <QDir>
 #include <QList>
 #include <iostream>
-
+#include <initdata.h>
 
 class CalculationStrategy
 {
 public:
-    virtual QList<std::pair<QString,double>> CalculationMethod(const QString&) = 0;
+    virtual QList<InitData> CalculationMethod(const QString&) = 0;
     static double FullDirSize(QString Dir);
 };
 

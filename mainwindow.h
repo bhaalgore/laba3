@@ -15,30 +15,34 @@
 #include "byfolder_calculationstrategy.h"
 
 class QTableView;
-class QItemSelection;
-class QAbstractItemView;
 
 
-//class ByFileType_CalculationStrategy;
-//class ByFolder_CalculationStrategy;
 
 namespace Ui { class MainWindow; }
 class MainWindow : public QMainWindow
 {
+    Q_OBJECT
+private slots:
+    void FolderReSelection(const QItemSelection &selected);
+    void ResizeColBasedOnData();
+    void sortTypeChange(int type);
+
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
     QWidget* view;
 
+    QTableView *tableView;
     Model* Model_;
     ByFolder_CalculationStrategy* folderModel;
     ByFileType_CalculationStrategy* fileModel;
     CalculationStrategy *strat;
     QFileSystemModel *directoryModel;
-    QTableView *tableView;
     QString currentDirectory;
 };
+
+
 
 #endif // MAINWINDOW_H

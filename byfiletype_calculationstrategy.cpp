@@ -1,39 +1,42 @@
 #include "byfiletype_calculationstrategy.h"
 
-QList<std::pair<QString,double>> ByFileType_CalculationStrategy::CalculationMethod(const QString& path)
+QList<InitData> ByFileType_CalculationStrategy::CalculationMethod(const QString& path)
 {
-    QDir dir(path);
-    QList<std::pair<QString,double>> typesSizeList;
-    if(!dir.exists())
-        throw QString("directory does not exist");
-    QFileInfoList filesInfoList = dir.entryInfoList(QDir::Files);
-    QFileInfoList dirList = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
-    QFileInfoList::iterator iterFileInfo = dirList.begin();;
-    while(iterFileInfo != dirList.end())
+    QDir directory(path);
+    if(directory.exists())
     {
-        filesInfoList += QDir(iterFileInfo->absoluteFilePath()).entryInfoList(QDir::Files);
-        dirList += QDir(iterFileInfo->absoluteFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
-        iterFileInfo++;
+    QFileInfoList FilesList = directory.entryInfoList(QDir::Files);
+    QFileInfoList directoryList = directory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
+    QFileInfoList::iterator iterator = directoryList.begin();;
+    for(int i = 0; i < directoryList.size(); i++)
+    {
+        FilesList += QDir(directoryList[i].absoluteFilePath()).entryInfoList(QDir::Files);
+        directoryList += QDir(directoryList[i].absoluteFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
     }
-
     QList <QString> typesList;
-    iterFileInfo = filesInfoList.begin();
-    while(iterFileInfo != filesInfoList.end())
+    iterator = FilesList.begin();
+    while(iterator != FilesList.end())
     {
-        if(!typesList.contains(iterFileInfo->suffix()))
-            typesList.push_back(iterFileInfo->suffix());
-        iterFileInfo++;
+        if(!typesList.contains(iterator->suffix()))
+            typesList.push_back(iterator->suffix());
+        iterator++;
     }
-    QString curSuffix;
+    QString currentSuffix;
+    QList<InitData> typesSizeList;
+    double directorySize = this->FullDirSize(path);
     for (QString &type : typesList)
     {
-        curSuffix = type;
-        typesSizeList.append(std::pair<QString,double>(curSuffix,0));
-        for (QFileInfo &curItem : filesInfoList)
+        currentSuffix = type;
+        typesSizeList.append(InitData(currentSuffix,0,0));
+        for (QFileInfo &curItem : FilesList)
         {
-            if(curItem.suffix() == curSuffix)
-            typesSizeList.last().second += curItem.size();
+            if(curItem.suffix() == currentSuffix)
+            typesSizeList.last().size_ += curItem.size();
         }
+           typesSizeList.last().percent_ = typesSizeList.last().size_ / directorySize;
     }
- return typesSizeList;
+            return typesSizeList;
+    }
+    else
+        throw QString("directory does not exist");
 }

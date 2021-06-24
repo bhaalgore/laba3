@@ -49,7 +49,7 @@ QVariant Model::data(const QModelIndex &ix, int role) const
     {
         if(model_[ix.row()].size_ == 0)
             return 0;
-        if(model_[ix.row()].percent_ > 0.0001)
+        if(model_[ix.row()].percent_ < 0.0001)
          return "<0,01";
 
         return (model_[ix.row()].percent_*100);
@@ -58,11 +58,13 @@ QVariant Model::data(const QModelIndex &ix, int role) const
 
 int Model::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return model_.count();
 }
 
 int Model::columnCount(const QModelIndex &parent) const
 {
+   Q_UNUSED(parent);
    return PERCENT+1;
 }
 

@@ -2,10 +2,17 @@
 #define INITDATA_H
 
 
+#include <QString>
+
 class InitData
 {
 public:
-    InitData();
+    InitData(QString name, double sizePercent, double size);
+
+    QString name_;
+    double size_;
+    double percent_;
 };
 
-#endif // INITDATA_H
+
+#endif // INOTDATA_H

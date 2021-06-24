@@ -2,14 +2,15 @@
 
 
 
-QList<std::pair<QString,double>> ByFolder_CalculationStrategy::CalculationMethod(const QString& path)
+QList<InitData> ByFolder_CalculationStrategy::CalculationMethod(const QString& path)
 {
 QDir directory(path);
 QFileInfoList FilesList = directory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
-QList<std::pair<QString,double>> FilesSizeList;
+QList<InitData> FilesSizeList;
     if(directory.exists())
     {
         QFileInfoList FilesList = directory.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
+        double dSize = this->FullDirSize(path);
         for (QFileInfo &currentFile : FilesList)
         {
             double FileSize;
@@ -17,7 +18,7 @@ QList<std::pair<QString,double>> FilesSizeList;
                 FileSize = this->FullDirSize(path + '/' +currentFile.fileName());
             else
                 FileSize = (double)currentFile.size();
-            FilesSizeList.push_back(std::pair<QString,double> (currentFile.fileName(),FileSize));
+            FilesSizeList.push_back(InitData(currentFile.fileName(),FileSize, FileSize/dSize));
         }
        return FilesSizeList;
     }

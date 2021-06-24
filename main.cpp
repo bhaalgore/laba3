@@ -1,5 +1,7 @@
 #include <iostream>
+#include <QApplication>
 
+#include "mainwindow.h"
 #include "calculationstrategy.h"
 #include "byfolder_calculationstrategy.h"
 #include "byfiletype_calculationstrategy.h"
@@ -7,7 +9,7 @@
 
 using namespace std;
 
-void PrintInfo(QString Dir, CalculationStrategy* strat)
+/*void PrintInfo(QString Dir, CalculationStrategy* strat)
 {
    QList<pair<QString,double>> FilesList = strat->CalculationMethod(Dir);
    double Size = CalculationStrategy::FullDirSize(Dir);
@@ -41,11 +43,11 @@ void PrintInfo(QString Dir, CalculationStrategy* strat)
        }
        cout << "Full directory size: " << x << "%" << endl;
    }
-}
+}*/
 
 int main(int argc, char *argv[])
 {
-    ByFolder_CalculationStrategy * str1 = new ByFolder_CalculationStrategy;
+    /*ByFolder_CalculationStrategy * str1 = new ByFolder_CalculationStrategy;
     ByFileType_CalculationStrategy* str2 = new ByFileType_CalculationStrategy;
 
     QString dir("D:/qTREPOS/test/1");
@@ -56,5 +58,10 @@ int main(int argc, char *argv[])
     PrintInfo(dir,str1);
     cout << "STR2" << endl;
     PrintInfo(dir,str2);
+*/
 
+    QApplication a(argc,argv);
+    MainWindow s;
+    s.show();
+    return a.exec();
 }
