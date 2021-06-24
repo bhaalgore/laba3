@@ -1,11 +1,32 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef FILESMODEL_H
+#define FILESMODEL_H
 
+#include <QList>
+#include <QAbstractTableModel>
 
-class Model
+#include "initdata.h"
+
+class Model : public QAbstractTableModel
 {
-public:
-    Model();
-};
+   public:
+    Model(QObject *parent, QList<InitData> model = QList<InitData>());
 
-#endif // MODEL_H
+
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    QVariant data(const QModelIndex &ix, int role) const;
+    int rowCount(const QModelIndex &parent) const;
+    int columnCount(const QModelIndex &parent) const;
+
+    void setModel(QList<InitData> model);
+
+   private:
+    enum ColumnName {
+    NAME,
+    SIZE,
+    PERCENT
+    };
+
+    QList<InitData> model_;
+
+};
+#endif // FILESMODEL_H
