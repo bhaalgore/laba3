@@ -9,15 +9,15 @@
 class Model : public QAbstractTableModel
 {
    public:
+    Model();
     Model(QObject *parent, QList<InitData> model = QList<InitData>());
-
-
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     QVariant data(const QModelIndex &ix, int role) const;
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;
 
-    void setModel(QList<InitData> model);
+    //void setModel(QList<InitData> model);
+    virtual void setModel(QList<InitData> model);
 
    private:
     enum ColumnName {

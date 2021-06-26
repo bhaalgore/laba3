@@ -1,11 +1,15 @@
 #include <cmath>
+#include <QString>
 
 #include "model.h"
 #include "calculationstrategy.h"
 #include "byfiletype_calculationstrategy.h"
 #include "byfolder_calculationstrategy.h"
 
-Model::Model(QObject *parent, QList<InitData> model) : QAbstractTableModel(parent)//управляет данными
+Model::Model()
+{}
+
+Model::Model(QObject *parent, QList<InitData> model) : QAbstractTableModel(parent)
 {
     model_ = model;
 }
@@ -23,7 +27,7 @@ QVariant Model::headerData(int section, Qt::Orientation orientation, int role) c
     case NAME:
         return "Name";
     case SIZE:
-        return "Size";
+        return "Size(bytes)";
     case PERCENT:
         return "Procent";
     }
@@ -43,16 +47,17 @@ QVariant Model::data(const QModelIndex &ix, int role) const
     }
     else if (ix.column() == 1)
     {
-        return model_[ix.row()].size_;
+        return QString::number((model_[ix.row()].size_),'f',0);
+
     }
     else if (ix.column() == 2)
     {
         if(model_[ix.row()].size_ == 0)
-            return 0;
-        if(model_[ix.row()].percent_ < 0.0001)
-         return "<0,01";
+            return  "0 %";
+        if(model_[ix.row()].percent_ < 0.01)
+         return "<0,01 %";
 
-        return (model_[ix.row()].percent_*100);
+        return QString::number((model_[ix.row()].percent_),'f',2) + " %";
     }
 }
 

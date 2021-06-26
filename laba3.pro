@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,6 +12,7 @@ SOURCES += \
     byfiletype_calculationstrategy.cpp \
     byfolder_calculationstrategy.cpp \
     calculationstrategy.cpp \
+    charts.cpp \
     initdata.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -21,6 +22,7 @@ HEADERS += \
     byfiletype_calculationstrategy.h \
     byfolder_calculationstrategy.h \
     calculationstrategy.h \
+    charts.h \
     initdata.h \
     mainwindow.h \
     model.h
