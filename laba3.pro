@@ -14,6 +14,7 @@ SOURCES += \
     calculationstrategy.cpp \
     charts.cpp \
     initdata.cpp \
+    interfacemodel.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp
@@ -24,6 +25,7 @@ HEADERS += \
     calculationstrategy.h \
     charts.h \
     initdata.h \
+    interfacemodel.h \
     mainwindow.h \
     model.h
 

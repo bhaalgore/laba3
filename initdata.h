@@ -15,4 +15,4 @@ public:
 };
 
 
-#endif // INOTDATA_H
+#endif // INITDATA_H

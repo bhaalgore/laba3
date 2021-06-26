@@ -4,9 +4,10 @@
 #include <QList>
 #include <QAbstractTableModel>
 
+#include "interfacemodel.h"
 #include "initdata.h"
 
-class Model : public QAbstractTableModel
+class Model : public QAbstractTableModel, public InterfaceModel
 {
    public:
     Model();

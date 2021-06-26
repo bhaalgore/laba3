@@ -8,13 +8,14 @@
 
 using namespace QtCharts;
 
-class Charts:public Model
+class Charts:public InterfaceModel
 {
 public:
     void setModel(QList<InitData> model);
+    void updateChart(QAbstractSeries* series);
     virtual QAbstractSeries* ListToSeries(QList<InitData> model) = 0;
-    virtual void updateChart(QAbstractSeries* series);
-    virtual void descriptions() = 0;
+    virtual void descriptions();
+    //virtual void descriptions() = 0;
 
 protected:
     QChart* chart;
@@ -27,7 +28,7 @@ public:
     ~PieChartAdapter() = default;
    QAbstractSeries* ListToSeries(QList<InitData> model);
    QChart * fChart();
-   void descriptions();
+   //void descriptions();
 };
 
 class BarGraphAdapter:public Charts
@@ -37,7 +38,7 @@ public:
     ~BarGraphAdapter() = default;
     QAbstractSeries* ListToSeries(QList<InitData> model);
     QChart * fChart();
-    void descriptions();
+    //void descriptions();
 
 };
 

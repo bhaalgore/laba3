@@ -33,13 +33,12 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 
     view=tableView;
 
-    ui->horizontalLayout_2->addWidget(tableView);
-
     BarGraph = new BarGraphAdapter(this,strat->CalculationMethod(currentDirectory));
     PieChart = new PieChartAdapter(this,strat->CalculationMethod(currentDirectory));
     BView = new QChartView(BarGraph->fChart());
     PView = new QChartView(PieChart->fChart());
 
+    ui->horizontalLayout_2->addWidget(tableView);
     ui->horizontalLayout_2->addWidget(BView,2);
     ui->horizontalLayout_2->addWidget(PView,2);
     BView->hide();

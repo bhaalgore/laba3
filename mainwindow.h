@@ -78,7 +78,7 @@ private:
 
     QTableView *tableView;
     Model* Model_;
-    Model*ptrModel;
+    InterfaceModel*ptrModel;
     ByFolder_CalculationStrategy* folderModel;
     ByFileType_CalculationStrategy* fileModel;
     CalculationStrategy *strat;
